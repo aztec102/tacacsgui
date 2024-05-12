@@ -240,12 +240,13 @@ class APIUpdateCtrl extends Controller
 				break;
 			case $gclient[1]==200:
 				$data['output'] = json_decode($gclient[0], true);
-				if ($data['output'] AND $data['output']['error'] AND $data['output']['error']['type']){
-					if ($data['output']['error']['type'] == 'not match') file_put_contents(TAC_ROOT_PATH.'/../tgui_data/tgui.key', '');
-				}
-				if (!$data['output']['error'] AND !$this->activated()) {
-					file_put_contents(TAC_ROOT_PATH.'/../tgui_data/tgui.key', $this->uuid_hash());
-				}
+				//if ($data['output'] AND $data['output']['error'] AND $data['output']['error']['type']){
+				//	if ($data['output']['error']['type'] == 'not match') file_put_contents(TAC_ROOT_PATH.'/../tgui_data/tgui.key', '');
+				//}
+				//if (!$data['output']['error'] AND !$this->activated()) {
+				//	file_put_contents(TAC_ROOT_PATH.'/../tgui_data/tgui.key', $this->uuid_hash());
+				//}
+                file_put_contents(TAC_ROOT_PATH.'/../tgui_data/tgui.key', $this->uuid_hash());
 				break;
 			default:
 				$data['output'] = ['error' => ['message'=>'Something goes wrong... Is it developer mistake?']];

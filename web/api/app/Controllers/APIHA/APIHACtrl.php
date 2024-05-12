@@ -246,10 +246,12 @@ class APIHACtrl extends Controller
       case 'init':
         $data['messages'][] = 'Master Key: '.Controller::uuid_hash();
         $data['messages'][] = 'Slave Key: '. $allParams['key'];
-        if (!$this->HAGeneral->checkActivation([ Controller::uuid_hash(), $allParams['key'] ])){
-          $data['messages'][] = 'Error: Can\'t check activation';
-          return $res -> withStatus(200) -> write(json_encode($data));
-        }
+        // Disable license check from HA
+        //if (!$this->HAGeneral->checkActivation([ Controller::uuid_hash(), $allParams['key'] ])){
+         // $data['messages'][] = 'Error: Can\'t check activation';
+        //  return $res -> withStatus(200) -> write(json_encode($data));
+        //}
+        $result['messages'][] = 'Installation Activated';
         $this->HAMaster->setSlave(['status' => 0, 'api' => $allParams['api'], 'db' => $allParams['dbHash']]);
         $data['mysql'] = $this->HAMaster->getMysqlParams($config['psk']);
         $data['sid'] = $this->HAMaster->makeSlaveId();

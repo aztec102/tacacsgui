@@ -25,12 +25,13 @@ class HAMaster extends Controller
     $result = [ 'error' => true, 'messages' => [], 'msg' => ''];
 
     $result['messages'][] = 'Installation key: '.Controller::uuid_hash();
-
-    if (!$this->HAGeneral->checkActivation([ Controller::uuid_hash() ])){
-      $result['messages'][] = 'Error: Can\'t check activation';
-      return $result;
-    } else
-      $result['messages'][] = 'Installation Activated';
+    // Disable license check from HA
+    //if (!$this->HAGeneral->checkActivation([ Controller::uuid_hash() ])){
+    //  $result['messages'][] = 'Error: Can\'t check activation';
+    //  return $result;
+    //} else
+    //  $result['messages'][] = 'Installation Activated';
+    $result['messages'][] = 'Installation Activated';
 
     $status = $this->status($params['psk']);
 
